@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Period;
 use App\Models\Timetable;
 use App\Repositories\aScServerRepository;
 use Illuminate\Console\Command;
@@ -37,11 +38,13 @@ class RefreshServerData extends Command
     {
         $timetables = $this->ascServerRepository->fetchAvailableTimetables();
 
-        $timetablesData = $timetables->map(function ($timetable) {
-            return $this->ascServerRepository->fetchTimetableData($timetable->id);
-        });
-
-        dd($timetablesData);
+        $t = $this->ascServerRepository->fetchTimetableData($timetables[0]->id);
+        dd($t);
+//        $timetablesData = $timetables->map(function ($timetable) {
+//            return $this->ascServerRepository->fetchTimetableData($timetable->id);
+//        });
+//
+//        dd($timetablesData);
 
 //        $timetables->forEach(function ($ele) {
 //            $ele->saveOrFail();

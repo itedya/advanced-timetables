@@ -12,14 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('periods', function (Blueprint $table) {
-            $table->id();
-            $table->integer('period');
-            $table->string('name');
-            $table->string('short');
-            $table->time('start_time');
-            $table->time('end_time');
+        Schema::create('day_identifiers', function (Blueprint $table) {
+            $table->char('identifier', 7);
             $table->timestamps();
+
+            $table->primary('identifier');
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('periods');
+        Schema::dropIfExists('day_identifiers');
     }
 };

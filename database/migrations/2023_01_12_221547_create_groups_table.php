@@ -12,14 +12,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('periods', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->integer('period');
             $table->string('name');
             $table->string('short');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->timestamps();
+            $table->foreignId('class_id')
+                ->references('id')
+                ->on('school_classes')
+                ->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('periods');
+        Schema::dropIfExists('groups');
     }
 };
